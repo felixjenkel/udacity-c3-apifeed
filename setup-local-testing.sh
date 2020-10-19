@@ -32,19 +32,19 @@ docker run \
 
 sleep 2
 
-docker run \
-    --network=host \
-    -d \
-    --rm \
-    --name udacity-api-feed \
-    -p 8080:8080 \
-    -e POSTGRES_USERNAME \
-    -e POSTGRES_PASSWORD \
-    -e POSTGRES_HOST \
-    -e POSTGRES_DB \
-    -e AWS_BUCKET \
-    -e AWS_REGION \
-    -e AWS_PROFILE \
-    -e JWT_SECRET \
-    -e URL \
-    udacity-api-feed:latest
+# docker run \
+#     --network=host \
+#     -d \
+#     --rm \
+#     --name udacity-api-feed \
+#     -p 8080:8080 \
+#     -e POSTGRES_USERNAME \
+#     -e POSTGRES_PASSWORD \
+#     -e POSTGRES_HOST \
+#     -e POSTGRES_DB \
+#     -e AWS_BUCKET \
+#     -e AWS_REGION \
+#     -e AWS_PROFILE \
+#     -e JWT_SECRET \
+#     -e URL \
+#     udacity-api-feed:latest
