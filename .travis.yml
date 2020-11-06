@@ -7,7 +7,23 @@ services:
 
 # Pre-testing installs
 install:
-  - echo "nothing needs to be installed"
+  - echo "--- INSTALL PHASE BEGINN ---"
+  - echo "--- INSTALL KUBECTL ---"
+  - curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+  - chmod +x ./kubectl
+  - sudo mv ./kubectl /usr/local/bin/kubectl
+  - kubectl version --client
+  - echo "--- CONFIGURE KUBECTL ---"
+  - mkdir ${HOME}/.kube
+  - echo "$KUBE_CONFIG" | base64 --decode > ${HOME}/.kube/config
+  - cat ${HOME}/.kube/config
+  - kubectl get nodes
+  - echo "--- INSTALL AWS CLI ---"
+  - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  - unzip awscliv2.zip
+  - sudo ./aws/install
+  - aws --version
+  - echo "--- INSTALL PHASE DONE ---"
 
 # Scripts to be run such as tests
 before_script:
@@ -15,9 +31,11 @@ before_script:
 
 script:
   - docker --version # print the version for logging
-  - docker build -t udacity-3-apifeed .
-  - docker tag udacity-3-apifeed fjenkel/udacity-3-apifeed:latest
+  - docker build -t ${PROJECT_NAME} .
+  - docker tag ${PROJECT_NAME} fjenkel/${PROJECT_NAME}:latest
 
 after_success:
   - echo "$DOCKER_ACCESS_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push fjenkel/udacity-3-apifeed
+  - docker push fjenkel/${PROJECT_NAME}
+  - kubectl apply -f ./deploy/deployment.yaml
+  - kubectl apply -f ./deploy/service.yaml
