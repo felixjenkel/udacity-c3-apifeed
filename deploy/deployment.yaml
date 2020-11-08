@@ -19,3 +19,49 @@ spec:
         image: fjenkel/udacity-3-apifeed
         ports:
         - containerPort: 8080
+        env:
+          - name: POSTGRES_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: api-feed-scr
+                key: postgres-username
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: api-feed-scr
+                key: postgres-password
+          - name: POSTGRES_DB
+            valueFrom:
+              secretKeyRef:
+                name: api-feed-scr
+                key: postgres-db
+          - name: POSTGRES_HOST
+            valueFrom:
+              secretKeyRef:
+                name: api-feed-scr
+                key: postgres-host
+          - name: AWS_REGION
+            valueFrom:
+              secretKeyRef:
+                name: api-feed-scr
+                key: aws-region
+          - name: AWS_PROFILE
+            valueFrom:
+              secretKeyRef:
+                name: api-feed-scr
+                key: aws-profile
+          - name: AWS_BUCKET
+            valueFrom:
+              secretKeyRef:
+                name: api-feed-scr
+                key: aws-bucket
+          - name: URL
+            valueFrom:
+              secretKeyRef:
+                name: api-feed-scr
+                key: url
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: api-feed-scr
+                key: jwt-secret

@@ -38,5 +38,9 @@ script:
 after_success:
   - echo "$DOCKER_ACCESS_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push fjenkel/${PROJECT_NAME}
+  - kubectl apply -f ./deploy/kubernetes-secrets.yaml
+  - kubectl apply -f ./deploy/postgres-configmap.yaml
+  - kubectl apply -f ./deploy/postgres-deployment.yaml
+  - kubectl apply -f ./deploy/postgres-service.yaml
   - kubectl apply -f ./deploy/deployment.yaml
   - kubectl apply -f ./deploy/service.yaml
