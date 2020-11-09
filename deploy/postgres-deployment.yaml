@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres
+  name: udacity-3-apifeed-pg
   labels:
     app: udacity-3-apifeed-pg
 spec:

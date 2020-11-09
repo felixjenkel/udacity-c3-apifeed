@@ -10,4 +10,4 @@ spec:
     port: 8080
     targetPort: 8080
   selector:
-    service: apifeed
+    app: udacity-3-apifeed

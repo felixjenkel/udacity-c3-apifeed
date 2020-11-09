@@ -10,4 +10,4 @@ spec:
     port: 5432
     targetPort: 5432
   selector:
-    service: apifeed-pg
+    app: udacity-3-apifeed-pg
