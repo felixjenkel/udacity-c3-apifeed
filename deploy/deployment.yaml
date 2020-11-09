@@ -75,3 +75,8 @@ spec:
               secretKeyRef:
                 name: api-feed-scr
                 key: jwt-secret
+          - name: PORT
+            valueFrom:
+              secretKeyRef:
+                name: api-feed-scr
+                key: port
